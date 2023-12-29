@@ -59,7 +59,7 @@ Pin 4: RXD-
 Pin 5: RXD+
 Pin 6: Not connected
 
-(See cable1.jpb and cable2.jpg in the images folder)
+(See cable1.jpg and cable2.jpg in the images folder)
 
 Thanks to Kyle from Kismet Emergency Communications for providing the RS-485 info! 
 
@@ -72,6 +72,8 @@ The antenna is powered by an RTL-SDR bias-tee.
 More information on GPS antenna modification can be found at:
 wiki.muc.ccc.de/iridium:antennas 
 or dodgyengineering.com/2016/09/05/active-gps-antenna-modification/
+
+I am using an RTL-SDR Blog v3 software defined radio as the receiver. 
 
 This code has been tested sucessfully on a range of Linux PCs, from 686-class using
 a low-resource distro, to higher-end running a modern distribution. 
