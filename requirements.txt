@@ -1,0 +1,8 @@
+#Package requirements for carryout_scan.py and carryout_image.py
+
+numpy
+pyserial
+regex
+matplotlib
+pyrtlsdr
+pylab
