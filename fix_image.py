@@ -13,24 +13,23 @@ with open(sys.argv[1], 'r') as file_name:
 
 #Pull timestamp from filename (there's probably a better way to do this)
 header, *filename_parts = str(file_name).split('-')     
-file_name=str(filename_parts[2])
+file_name = str(filename_parts[2])
 header, *split = file_name.split('.')
-timestamp=(filename_parts[1]+'-'+header)
+timestamp = ("{filename_parts[1]}-{header}")
 
 print('Loading parameters of scan.')
-scan_params = np.loadtxt("scan-settings-"+timestamp+".txt")
-az_start=int(scan_params[0])
-az_end=int(scan_params[1])
-el_start=int(scan_params[2])
-el_end=int(scan_params[3])
-resolution=int(scan_params[4])
-user_freq=str(round(scan_params[5], 2))
-bias_tee=int(scan_params[6])
-if bias_tee==1:
-	bias_str="On"
+scan_params = np.loadtxt(f"scan-settings-{timestamp}.txt")
+az_start = int(scan_params[0])
+az_end = int(scan_params[1])
+el_start = int(scan_params[2])
+el_end = int(scan_params[3])
+resolution = int(scan_params[4])
+user_freq = str(round(scan_params[5], 2))
+if (bias_tee := int(scan_params[6]) == 1)
+	bias_str = "On"
 else:
-	bias_str="Off"
-user_gain=str(scan_params[7])
+	bias_str = "Off"
+user_gain = str(scan_params[7])
 
 
 #Trim off empty edge of the array (probably an ugly hack)
@@ -46,14 +45,14 @@ cleaned_data = np.delete(sky_data, obj=0, axis=1)
 #		cleaned_data[row_index]=np.roll(cleaned_data[row_index],8) #Shift every other row of matrix left 
 		
 
-az_end = az_end - 1
+az_end -= 1
 
 #set up custom axis labels
-x=np.array([0,(az_end-az_start)/2,az_end-az_start])
-az_range=np.array([az_start,(az_start+az_end)/2,az_end])
+x = np.array([0,(az_end-az_start)/2,az_end-az_start])
+az_range = np.array([az_start,(az_start+az_end)/2,az_end])
 plt.xticks(x,az_range)
-y=np.array([0,(el_end-el_start)/2,el_end-el_start])
-el_range=np.array([el_end,(el_start+el_end)/2,el_start])
+y = np.array([0,(el_end-el_start)/2,el_end-el_start])
+el_range = np.array([el_end,(el_start+el_end)/2,el_start])
 plt.yticks(y,el_range)
 	
 	
@@ -69,5 +68,3 @@ plt.title("Frequency: " + user_freq +"MHz, Gain: " + user_gain + ", Bias Tee: "+
 
 
 plt.show()
-
-
